@@ -12,8 +12,7 @@ import { useCountUp } from './utils/hooks';
 import ProductionGoalCard from './components/ProductionGoalCard';
 import BankConnectModal from './components/BankConnectModal';
 import BankDataFlipBanner from './components/BankDataFlipBanner';
-import SmartGoalInput from './components/SmartGoalInput';
-import SmartIncomeParser from './components/SmartIncomeParser';
+import AIFinancialIntelligenceHub from './components/AIFinancialIntelligenceHub';
 
 // ── SEED DATA ────────────────────────────────────────────────────
 const SEED_GOALS = [
@@ -720,40 +719,17 @@ export default function App() {
 
         {/* ── TAB: AI + ML ───────────────────────────────────── */}
         {tab === 'intelligence' && (
-          <div key="intelligence" className="animate-slide-up">
-            {/* Header notice */}
-            <div className="notice notice-indigo" style={{ marginBottom: '24px', gap: '12px' }}>
-              <Sparkles size={16} style={{ flexShrink: 0 }} />
-              <div>
-                <strong>Real ML runs in your browser</strong> — no API key, no server, works offline.
-                Model: <code style={{ fontFamily: 'var(--mono)', fontSize: '0.75rem' }}>Xenova/nli-deberta-v3-xsmall</code> (~35 MB, cached after first load).
-              </div>
-            </div>
-
-            {/* Smart Goal Parser */}
-            <div style={{ marginBottom: '24px' }}>
-              <div className="section-header">
-                <div>
-                  <div className="section-title">① Smart Goal Parser</div>
-                  <div className="section-sub">Type any purchase in plain English → AI auto-fills category, urgency, importance & price</div>
-                </div>
-              </div>
-              <SmartGoalInput onGoalExtracted={handleMLGoal} currency={currency} />
-            </div>
-
-            <div className="divider" style={{ marginBottom: '24px' }} />
-
-            {/* Smart Income Classifier */}
-            <div style={{ marginBottom: '24px' }}>
-              <div className="section-header">
-                <div>
-                  <div className="section-title">② Income Stream Classifier</div>
-                  <div className="section-sub">Describe any earnings → AI assigns type and confidence probability</div>
-                </div>
-              </div>
-              <SmartIncomeParser onStreamExtracted={handleMLStream} currency={currency} />
-            </div>
-          </div>
+          <AIFinancialIntelligenceHub
+            goals={goals}
+            setGoals={setGoals}
+            streams={streams}
+            setStreams={setStreams}
+            currentSavings={currentSavings}
+            monthlyExpenses={monthlyExpenses}
+            useInterest={useInterest}
+            currency={currency}
+            onOpenGoalModal={handleMLGoal}
+          />
         )}
       </div>
 
